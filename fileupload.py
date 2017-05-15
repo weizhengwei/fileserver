@@ -1,6 +1,11 @@
+# -*- coding: utf-8 -*-
 from flask import Flask
 from flask import request, render_template
 import os
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 app = Flask(__name__)
 SAVEPATH = os.path.curdir+'/file/'
@@ -18,7 +23,7 @@ def upload():
 
 def uploadfile(req):
 	file = req.files['filename']
-	filename = file.filename
+	filename = file.filename.decode('utf8')
 	file.save(SAVEPATH+filename)
 	return '%s save success' % filename
 
